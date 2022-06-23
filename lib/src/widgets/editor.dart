@@ -151,6 +151,7 @@ class QuillEditor extends StatefulWidget {
       required this.expands,
       this.showCursor,
       this.paintCursorAboveText,
+      this.cursorStyle,
       this.placeholder,
       this.enableInteractiveSelection = true,
       this.scrollBottomInset = 0,
@@ -289,6 +290,8 @@ class QuillEditor extends StatefulWidget {
   ///
   /// Defaults to `false`.
   final bool expands;
+
+  final CursorStyle? cursorStyle;
 
   /// Configures how the platform keyboard will select an uppercase or
   /// lowercase keyboard.
@@ -437,15 +440,16 @@ class QuillEditorState extends State<QuillEditor>
       ),
       showSelectionHandles: isMobile(theme.platform),
       showCursor: widget.showCursor,
-      cursorStyle: CursorStyle(
-        color: cursorColor,
-        backgroundColor: const Color.fromRGBO(28, 33, 33, 1),
-        width: 2,
-        radius: cursorRadius,
-        offset: cursorOffset,
-        paintAboveText: widget.paintCursorAboveText ?? paintCursorAboveText,
-        opacityAnimates: cursorOpacityAnimates,
-      ),
+      cursorStyle: widget.cursorStyle ??
+          CursorStyle(
+            color: cursorColor,
+            backgroundColor: Colors.grey,
+            width: 2,
+            radius: cursorRadius,
+            offset: cursorOffset,
+            paintAboveText: widget.paintCursorAboveText ?? paintCursorAboveText,
+            opacityAnimates: cursorOpacityAnimates,
+          ),
       textCapitalization: widget.textCapitalization,
       minHeight: widget.minHeight,
       maxHeight: widget.maxHeight,
