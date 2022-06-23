@@ -439,7 +439,7 @@ class QuillEditorState extends State<QuillEditor>
       showCursor: widget.showCursor,
       cursorStyle: CursorStyle(
         color: cursorColor,
-        backgroundColor: Colors.grey,
+        backgroundColor: const Color.fromRGBO(28, 33, 33, 1),
         width: 2,
         radius: cursorRadius,
         offset: cursorOffset,
