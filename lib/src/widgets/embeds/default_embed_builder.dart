@@ -76,10 +76,10 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
                                 .item1;
                         controller.replaceText(offset, 1, '',
                             TextSelection.collapsed(offset: offset));
-                        Navigator.pop(context);
                       },
                       child: const Icon(
                         Icons.close,
+                        color: Colors.white,
                         size: 14,
                       )),
                 ),
