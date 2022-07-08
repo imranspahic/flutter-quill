@@ -80,7 +80,7 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
                       child: const Icon(
                         Icons.close,
                         color: Colors.white,
-                        size: 14,
+                        size: 16,
                       )),
                 ),
               ))
