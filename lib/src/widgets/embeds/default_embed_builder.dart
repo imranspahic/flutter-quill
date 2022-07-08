@@ -58,6 +58,12 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
 
       if (!readOnly && isMobile()) {
         return Stack(children: [
+          Align(
+              child: Container(
+            height: 100,
+            width: 100,
+            color: Colors.red,
+          )),
           image,
           Positioned(
               top: 8,
@@ -83,7 +89,13 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
                         size: 14,
                       )),
                 ),
-              ))
+              )),
+          Align(
+              child: Container(
+            height: 100,
+            width: 100,
+            color: Colors.red,
+          ))
         ]);
       }
 
