@@ -57,56 +57,21 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
       }
 
       if (!readOnly && isMobile()) {
-        return GestureDetector(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    final resizeOption = _SimpleDialogItem(
-                      icon: Icons.settings_outlined,
-                      color: Colors.lightBlueAccent,
-                      text: 'Resize'.i18n,
-                      onPressed: () {
-                        Navigator.pop(context);
-                        showCupertinoModalPopup<void>(
-                            context: context,
-                            builder: (context) {
-                              final _screenSize = MediaQuery.of(context).size;
-                              return ImageResizer(
-                                  onImageResize: (w, h) {
-                                    final res = getImageNode(
-                                        controller, controller.selection.start);
-                                    final attr = replaceStyleString(
-                                        getImageStyleString(controller), w, h);
-                                    controller.formatText(
-                                        res.item1, 1, StyleAttribute(attr));
-                                  },
-                                  imageWidth: _widthHeight?.item1,
-                                  imageHeight: _widthHeight?.item2,
-                                  maxWidth: _screenSize.width,
-                                  maxHeight: _screenSize.height);
-                            });
-                      },
-                    );
-                    final copyOption = _SimpleDialogItem(
-                      icon: Icons.copy_all_outlined,
-                      color: Colors.cyanAccent,
-                      text: 'Copy'.i18n,
-                      onPressed: () {
-                        final imageNode =
-                            getImageNode(controller, controller.selection.start)
-                                .item2;
-                        final imageUrl = imageNode.value.data;
-                        controller.copiedImageUrl =
-                            Tuple2(imageUrl, getImageStyleString(controller));
-                        Navigator.pop(context);
-                      },
-                    );
-                    final removeOption = _SimpleDialogItem(
-                      icon: Icons.delete_forever_outlined,
-                      color: Colors.red.shade200,
-                      text: 'Remove'.i18n,
-                      onPressed: () {
+        return Stack(children: [
+          image,
+          Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black.withOpacity(0.1),
+                ),
+                child: Center(
+                  child: InkWell(
+                      onTap: () {
                         final offset =
                             getImageNode(controller, controller.selection.start)
                                 .item1;
@@ -114,18 +79,13 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
                             TextSelection.collapsed(offset: offset));
                         Navigator.pop(context);
                       },
-                    );
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                      child: SimpleDialog(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                          children: [resizeOption, copyOption, removeOption]),
-                    );
-                  });
-            },
-            child: image);
+                      child: const Icon(
+                        Icons.close,
+                        size: 14,
+                      )),
+                ),
+              ))
+        ]);
       }
 
       if (!readOnly || !isMobile() || isImageBase64(imageUrl)) {
