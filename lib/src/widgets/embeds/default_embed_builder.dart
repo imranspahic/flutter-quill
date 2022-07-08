@@ -65,10 +65,9 @@ Widget defaultEmbedBuilder(BuildContext context, QuillController controller,
               child: Container(
                 width: 24,
                 height: 24,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black.withOpacity(0.1),
-                ),
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromRGBO(0, 0, 0, 0.5)),
                 child: Center(
                   child: InkWell(
                       onTap: () {
